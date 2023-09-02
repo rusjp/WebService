@@ -62,7 +62,7 @@ Replace `your_service_name` and `Your Custom Title` with appropriate values.
 1. **Start the Flask Application**
 
 ```bash
-python app.py
+python web_ui.py
 ```
 
 2. **Open the Dashboard**
