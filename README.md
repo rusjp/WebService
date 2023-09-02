@@ -66,7 +66,9 @@ python web_ui.py
 ```
 
 2. **Open the Dashboard**
-   Open a web browser and navigate to the URL mentioned above.
+   The web interface should now be available at `http://0.0.0.0:80/`.
+
+![WebService Screenshot](ui.png)
 
 3. **Control Your Service**
    Use the Start, Stop, and Restart buttons to control your chosen Linux service.
@@ -93,6 +95,14 @@ To restart the service:
 curl -X POST http://x.x.x.x:80/action -d '{"command": "restart"}' -H "Content-Type: application/json"
 ```
 
+## Running the Curl Commmand
+```bash
+curl -X POST http://x.x.x.x:80/action -d '{"command": "start"}' -H "Content-Type: application/json"
+```
+## Example JSON Reply
+```bash
+{"status":"\u25cf cron.service - Regular background program processing daemon\n     Loaded: loaded (/lib/systemd/system/cron.service; enabled; vendor preset: enabled)\n     Active: active (running) since Sat 2023-00-00 00:00:00 UTC; 14min ago\n       Docs: man:cron(8)\n   Main PID: 3294 (cron)\n      Tasks: 1 (limit: 4558)\n     Memory: 328.0K\n        CPU: 3ms\n     CGroup: /system.slice/cron.service\n             \u2514\u25003294 /usr/sbin/cron -f -P\n\nSep 02 22:38:08 tailscale systemd[1]: Started Regular background program processing daemon cron[3294]: (CRON) INFO (pidfile fd = 3)\cron[3294]: (CRON) INFO (Skipping @reboot jobs -- not system startup)\n"}
+```
 ## Contributing
 
 Contributions are welcome! Feel free to open an issue or submit a pull request.
