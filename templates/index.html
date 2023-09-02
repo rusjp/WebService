@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --terminal-font-size: 12px;
+        }
+
+        .container {
+            max-width: 100%;
+        }
+        
+        .terminal-window {
+            max-width: 95%;
+            margin: 0 auto;
+            white-space: pre-wrap;
+            padding: 15px 20px;
+            padding-bottom: 50px;
+            font-size: var(--terminal-font-size);
+        }
+        code {
+            background-color: #333;
+            color: #1e90ff;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        
+        .btn {
+            margin: 0 15px;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white">
+
+<div class="container mt-5">
+    <h1 class="text-center mb-2">{{ title }}</h1>
+    <p class="text-center mb-4">This interface allows you to manage the {{ title }} service running on your server. You can start, stop, and restart the service, and view its status below.</p>
+
+<div class="text-center mb-3">
+    <h5>CURL Commands:</h5>
+    <p>Append <code>start</code>, <code>stop</code>, or <code>restart</code> to the following URL:</p>
+    <code>curl "http://{{ ip_address }}/action?command="</code>
+</div>
+
+    <div class="text-center mb-5">
+        <button class="btn btn-success" onclick="performAction('start')">Start Service</button>
+        <button class="btn btn-danger" onclick="performAction('stop')">Stop Service</button>
+        <button class="btn btn-warning" onclick="performAction('restart')">Restart Service</button>
+    </div>
+    <div class="border border-light p-3 terminal-window" style="background-color: #333;">
+        <h2 class="text-center mb-3">Service Status</h2>
+        <pre id="service-status" class="text-white">Fetching...</pre>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function updateStatus() {
+    fetch('/action', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            command: 'status'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("service-status").innerText = data.status;
+    });
+}
+
+function performAction(command) {
+    fetch('/action', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            command: command
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("service-status").innerText = data.status;
+    });
+}
+
+// Fetch the initial status
+updateStatus();
+</script>
+
+</body>
+</html>

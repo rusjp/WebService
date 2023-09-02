@@ -1,0 +1,10 @@
+{
+    "START_COMMAND_STR": "sudo systemctl start cron.service",
+    "STOP_COMMAND_STR": "sudo systemctl stop cron.service",
+    "RESTART_COMMAND_STR": "sudo systemctl restart cron.service",
+    "STATUS_COMMAND_STR": "sudo systemctl status cron.service",
+    "APP_TITLE": "WebService",
+    "FLASK_HOST": "0.0.0.0",
+    "FLASK_PORT": 80,
+    "FLASK_DEBUG": false
+}
