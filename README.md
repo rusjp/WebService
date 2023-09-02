@@ -57,7 +57,7 @@ The web interface should now be available at `http://localhost:80/`.
    Use the Start, Stop, and Restart buttons to control your chosen Linux service.
 
 
-![WebService Screenshot](webui.png)
+![WebService Screenshot](ui.png)
 
 ## Contributing
 
