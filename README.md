@@ -56,6 +56,30 @@ The web interface should now be available at `http://localhost:80/`.
 3. **Control Your Service**
    Use the Start, Stop, and Restart buttons to control your chosen Linux service.
 
+## Using Curl
+You can also control the service using curl. The API exposes an /action route to which you can send GET or POST requests.
+
+To start the service:
+```bash
+curl -X POST http://x.x.x.x:80/action -d '{"command": "start"}' -H "Content-Type: application/json"
+```
+To stop the service:
+```bash
+curl -X POST http://x.x.x.x:80/action -d '{"command": "stop"}' -H "Content-Type: application/json"
+```
+To restart the service:
+```bash
+curl -X POST http://x.x.x.x:80/action -d '{"command": "restart"}' -H "Content-Type: application/json"
+```
+Replace 'x.x.x.x' with your server's IP address: http://x.x.x.x:80/action
+For example, if your server's IP address is '192.168.1.10': http://192.168.1.10:80/action=
+
+
+## Running the Curl Commmand
+curl -X POST http://x.x.x.x:80/action -d '{"command": "start"}' -H "Content-Type: application/json"
+
+## Example JSON Reply
+{"status":"\u25cf cron.service - Regular background program processing daemon\n     Loaded: loaded (/lib/systemd/system/cron.service; enabled; vendor preset: enabled)\n     Active: active (running) since Sat 2023-00-00 00:00:00 UTC; 14min ago\n       Docs: man:cron(8)\n   Main PID: 3294 (cron)\n      Tasks: 1 (limit: 4558)\n     Memory: 328.0K\n        CPU: 3ms\n     CGroup: /system.slice/cron.service\n             \u2514\u25003294 /usr/sbin/cron -f -P\n\nSep 02 22:38:08 tailscale systemd[1]: Started Regular background program processing daemon cron[3294]: (CRON) INFO (pidfile fd = 3)\cron[3294]: (CRON) INFO (Skipping @reboot jobs -- not system startup)\n"}
 
 ![WebService Screenshot](ui.png)
 
